@@ -16,7 +16,7 @@ class AppStringConstants {
   //F
   //G
   //H
-  static String hotItemsOfTheDayText = "Hot Items of the day";
+  static String hotItemsOfTheDayText = "Hot Items ocf the day";
   static String homeText = "Home";
 
   //I
