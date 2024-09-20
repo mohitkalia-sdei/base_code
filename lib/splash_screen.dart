@@ -1,4 +1,3 @@
-import 'package:custom_maps/global_utils/app_assets.dart';
 import 'package:custom_maps/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,12 +21,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Image.asset(
-          AppAssets.bgImageIcon,
-          fit: BoxFit.contain,
-        ),
+        child: SizedBox(),
       ),
     );
   }
