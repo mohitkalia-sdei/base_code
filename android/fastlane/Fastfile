@@ -1,0 +1,44 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do |options|
+    json_key_path = options[:json_key]
+    if json_key_path
+      UI.message("Current working directory: #{Dir.pwd}")
+      UI.message("Content of json_key_path: #{json_key_path}")
+      if File.exist?(json_key_path)
+        upload_to_play_store(
+            track: 'internal',
+            json_key: json_key_path,
+            aab: '../build/app/outputs/bundle/release/app-release.aab',
+            mapping: '../build/app/outputs/mapping/release/mapping.txt'
+        )
+      else
+        UI.user_error!("The file path specified in json_key does not exist: #{json_key_path}")
+      end
+    else
+      UI.user_error!("json_key parameter is missing in the options")
+    end
+  end
+end
